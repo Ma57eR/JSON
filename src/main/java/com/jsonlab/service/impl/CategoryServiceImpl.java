@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static com.jsonlab.constants.GlobalConstants.RESOURCE_FILE_PATH;
 
@@ -35,9 +38,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void seedCategories() throws IOException {
-//        if (categoryRepository.count() > 0) {
-//            return;
-//        }
+        if (categoryRepository.count() > 0) {
+            return;
+        }
         String fileContent = Files
                 .readString(Path.of(RESOURCE_FILE_PATH + CATEGORIES_FILENAME));
 
@@ -47,5 +50,21 @@ public class CategoryServiceImpl implements CategoryService {
                 .filter(validationUtil::isValid)
                 .map(categorySeedDto -> modelMapper.map(categorySeedDto, Category.class))
                 .forEach(categoryRepository::save);
+    }
+
+    @Override
+    public Set<Category> findRandomCategories() {
+        Set<Category> categorySet = new HashSet<>();
+        long totalCategoriesCount = categoryRepository.count()+1;
+
+        int catCount = ThreadLocalRandom.current()
+                .nextInt(1, 4);
+        for (int i = 0; i < catCount; i++) {
+                       long randomId = ThreadLocalRandom.current()
+                               .nextLong(1, totalCategoriesCount);
+                       categorySet.add(categoryRepository.findById(randomId)
+                               .orElse(null));
+        }
+        return categorySet;
     }
 }
