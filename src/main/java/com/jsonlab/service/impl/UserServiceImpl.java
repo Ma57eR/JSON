@@ -1,8 +1,8 @@
 package com.jsonlab.service.impl;
 
 import com.google.gson.Gson;
-import com.jsonlab.constants.GlobalConstants;
 import com.jsonlab.model.dto.UserSeedDto;
+import com.jsonlab.model.dto.UserSoldDTO;
 import com.jsonlab.model.entity.User;
 import com.jsonlab.repository.UserRepository;
 import com.jsonlab.service.UserService;
@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 import static com.jsonlab.constants.GlobalConstants.RESOURCE_FILE_PATH;
 
@@ -55,4 +57,14 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(randomId)
                 .orElse(null);
     }
+
+    @Override
+    public List<UserSoldDTO> findAllUsersWithMoreThanOneSoldProduct() {
+        return userRepository.findAllUsersWithMoreThanOneSoldProductLastNameThanFirstName()
+                .stream()
+                .map(user -> modelMapper.map(user, UserSoldDTO.class))
+                .collect(Collectors.toList());
+    }
+
+
 }

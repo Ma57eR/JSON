@@ -1,9 +1,6 @@
 package com.jsonlab.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -20,6 +17,9 @@ public class User extends BaseEntity{
 
     @ManyToMany
     private Set<User> friends;
+
+    @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER)
+    private Set<Product> soldProducts;
 
     public User() {
     }
@@ -54,5 +54,13 @@ public class User extends BaseEntity{
 
     public void setFriends(Set<User> friends) {
         this.friends = friends;
+    }
+
+    public Set<Product> getSoldProducts() {
+        return soldProducts;
+    }
+
+    public void setSoldProducts(Set<Product> soldProducts) {
+        this.soldProducts = soldProducts;
     }
 }
