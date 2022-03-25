@@ -61,15 +61,17 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     }
 
     private void soldProducts() throws IOException, JAXBException {
-     List<UserSoldDTO> userSoldDTOS = userService
-                .findAllUsersWithMoreThanOneSoldProduct();
+     UserSoldDTO userSoldDTOS = userService
+                .findAllUsersWithMoreThanOneSoldProduct().stream().limit(1).findAny().get();
 
         //String content = gson.toJson(userSoldDTOS);
 
      //writeToFile(OUTPUT_PATH + USER_AND_SOLD_PRODUCT_FILE_NAME, content);
 
+
         JAXBContext context = JAXBContext.newInstance(UserSoldDTO.class);
         Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         marshaller.marshal(userSoldDTOS, new File(OUTPUT_PATH + "test.xml"));
     }

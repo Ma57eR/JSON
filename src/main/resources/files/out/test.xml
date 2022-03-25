@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users_sold>
+    <firstName>Gloria</firstName>
+    <lastName>Alexander</lastName>
+    <soldProducts>
+        <name>ORCHID SECRET PACT</name>
+        <price>59.53</price>
+    </soldProducts>
+    <soldProducts>
+        <name>DAYWEAR PLUS MULTI PROTECTION TINTED MOISTURIZER</name>
+        <price>555.12</price>
+    </soldProducts>
+    <soldProducts>
+        <name>Pollens - Trees, Birch Mix</name>
+        <price>1153.54</price>
+        <buyer_first_name>Carl</buyer_first_name>
+        <buyer_last_name>Lawson</buyer_last_name>
+    </soldProducts>
+    <soldProducts>
+        <name>Perrigo Benzoyl Peroxide</name>
+        <price>873.24</price>
+    </soldProducts>
+    <soldProducts>
+        <name>Growing Pains</name>
+        <price>1077.37</price>
+        <buyer_last_name>Stewart</buyer_last_name>
+    </soldProducts>
+    <soldProducts>
+        <name>Baza Antifungal</name>
+        <price>1162.34</price>
+        <buyer_last_name>Stewart</buyer_last_name>
+    </soldProducts>
+</users_sold>
